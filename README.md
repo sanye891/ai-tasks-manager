@@ -26,7 +26,7 @@
 ### 1. 克隆仓库
 
 ```bash
-git clone https://your-repo-url/ai-task-manager.git
+git clone https://github.com/sanye891/ai-tasks-manager.git
 cd ai-task-manager
 ```
 
