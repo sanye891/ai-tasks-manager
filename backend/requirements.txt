@@ -1,0 +1,6 @@
+Flask==2.0.1
+Flask-CORS==3.0.10
+uuid==1.30
+python-dotenv==0.19.1
+# 以下依赖将在阶段五AI功能集成时需要
+openai==1.12.0 

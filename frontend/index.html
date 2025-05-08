@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 任务管理器</title>
+    <!-- 引入CSS文件 -->
+    <link rel="stylesheet" href="style.css">
+    <!-- 引入图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 添加Google字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- 引入GSAP动画库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+</head>
+<body>
+    <!-- 启动动画 -->
+    <div class="splash-screen">
+        <div class="splash-container">
+            <div class="splash-text">
+                <i class="fas fa-brain"></i>
+                <h1>AI任务管理器</h1>
+                <p>智能管理您的每一项任务</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="app-container">
+        <div class="sidebar">
+            <div class="logo">
+                <i class="fas fa-brain"></i>
+                <h1>AI任务管理器</h1>
+            </div>
+            
+            <div class="filter-container">
+                <h3>筛选</h3>
+                <div class="filter-group">
+                    <label for="filter-category">分类</label>
+                    <select id="filter-category">
+                        <option value="all">全部</option>
+                        <option value="工作">工作</option>
+                        <option value="学习">学习</option>
+                        <option value="生活">生活</option>
+                        <option value="锻炼">锻炼</option>
+                        <option value="购物">购物</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="filter-priority">优先级</label>
+                    <select id="filter-priority">
+                        <option value="all">全部</option>
+                        <option value="高">高</option>
+                        <option value="中">中</option>
+                        <option value="低">低</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="sort-by">排序</label>
+                    <select id="sort-by">
+                        <option value="created_desc">最新创建</option>
+                        <option value="created_asc">最早创建</option>
+                        <option value="due_date_asc">截止日期</option>
+                        <option value="priority_desc">优先级</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button id="add-new-task-btn" class="action-btn">
+                <i class="fas fa-plus"></i> 添加新任务
+            </button>
+        </div>
+        
+        <div class="main-content">
+            <div class="header">
+                <h2>我的任务</h2>
+                <p><span id="task-count">0</span> 个任务</p>
+            </div>
+            
+            <div id="tasks-container" class="tasks-container">
+                <!-- 任务列表将由JavaScript动态生成 -->
+                <div class="loading">
+                    <i class="fas fa-spinner fa-spin"></i> 正在加载任务...
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 添加/编辑任务的模态框 -->
+    <div id="task-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">添加新任务</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            
+            <form id="task-form">
+                <input type="hidden" id="task-id">
+                
+                <div class="form-group">
+                    <label for="task-description">任务描述</label>
+                    <textarea id="task-description" required placeholder="描述你的任务..."></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="task-due-date">截止日期 (可选)</label>
+                        <input type="datetime-local" id="task-due-date">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="task-priority">优先级</label>
+                        <div class="priority-selector">
+                            <input type="radio" id="priority-low" name="priority" value="低">
+                            <label for="priority-low" class="priority-label low">低</label>
+                            
+                            <input type="radio" id="priority-medium" name="priority" value="中" checked>
+                            <label for="priority-medium" class="priority-label medium">中</label>
+                            
+                            <input type="radio" id="priority-high" name="priority" value="高">
+                            <label for="priority-high" class="priority-label high">高</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="task-category">分类 <small>(AI推荐)</small></label>
+                        <select id="task-category">
+                            <option value="工作">工作</option>
+                            <option value="学习">学习</option>
+                            <option value="生活">生活</option>
+                            <option value="锻炼">锻炼</option>
+                            <option value="购物">购物</option>
+                            <option value="其他" selected>其他</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="task-estimated-time">预估时间 <small>(AI推荐)</small></label>
+                        <input type="text" id="task-estimated-time" value="30分钟">
+                    </div>
+                </div>
+                
+                <div id="status-field" class="form-group" style="display: none;">
+                    <label for="task-status">状态</label>
+                    <select id="task-status">
+                        <option value="待办">待办</option>
+                        <option value="完成">完成</option>
+                    </select>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" id="ai-suggest-button" class="secondary-btn">
+                        <i class="fas fa-robot"></i> 获取AI建议
+                    </button>
+                    <button type="submit" id="submit-task-button" class="primary-btn">
+                        <i class="fas fa-save"></i> <span id="submit-button-text">添加任务</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- 确认删除的模态框 -->
+    <div id="confirm-modal" class="modal">
+        <div class="modal-content confirm-modal-content">
+            <div class="modal-header">
+                <h3>确认删除</h3>
+                <span class="close-modal" data-modal="confirm-modal">&times;</span>
+            </div>
+            <p>确定要删除这个任务吗？此操作不可撤销。</p>
+            <div class="form-actions">
+                <button id="cancel-delete" class="secondary-btn">取消</button>
+                <button id="confirm-delete" class="danger-btn">删除</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 引入JavaScript文件 -->
+    <script src="script.js"></script>
+</body>
+</html> 

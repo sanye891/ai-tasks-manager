@@ -1,0 +1,64 @@
+# Python虚拟环境
+venv/
+.venv/
+env/
+ENV/
+
+# Python缓存文件
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# 数据库文件
+*.db
+*.sqlite
+*.sqlite3
+
+# 密钥和敏感配置
+.env
+.flaskenv
+config.py
+instance/
+
+# 日志文件
+*.log
+logs/
+
+# IDE和编辑器文件
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 测试相关
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+.nox/
+
+# 前端构建和依赖
+node_modules/
+dist/
+build/
+.cache/
+.parcel-cache/
+
+# 打包和分发
+*.egg-info/
+dist/
+build/
+eggs/
+wheels/
+
+# 其他
+*.bak
+.temp/
+.tmp/
