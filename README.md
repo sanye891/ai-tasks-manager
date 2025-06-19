@@ -59,29 +59,25 @@ Create a .env file (YOUR_SITE_URL=http://localhost:5000, OPENROUTER_API_KEY)
 python app.py
 ```
 
-服务器将在 http://localhost:5000 运行
+The server will run at http://localhost:5000
 
-### 5. 打开前端页面
+### 5. Open the frontend page
 
-直接在浏览器中打开 `frontend/index.html` 文件
+Open `frontend/index.html` directly in your browser.
 
+## Usage
 
+1. Fill in the task description in the form
+2. Optionally set a deadline and priority
+3. Click the "Get AI Suggestion" button to automatically get task category and estimated time
+4. Click the "Add Task" button to submit the task
+5. Use filter and sort options to manage the task list
+6. Click the buttons on each task to mark as complete, edit, or delete
 
-## 使用说明
+## Contribution
 
-1. 在表单中填写任务描述
-2. 可选填写截止日期和选择优先级
-3. 点击"获取AI建议"按钮自动获取任务分类和预估时间建议
-4. 点击"添加任务"按钮提交任务
-5. 使用筛选和排序选项管理任务列表
-6. 点击任务上的按钮标记完成、编辑或删除任务
+Issues and suggestions are welcome!
 
+## License
 
-
-## 贡献
-
-欢迎提交问题和改进建议！
-
-## 许可
-
-MIT许可 
+MIT License
