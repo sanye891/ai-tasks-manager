@@ -18,7 +18,7 @@
 
 - **前端**: HTML, CSS, JavaScript（原生，无框架）
 - **后端**: Python Flask
-- **AI**: 简单关键词匹配（可升级为OpenAI API，也可以使用ds的API）
+- **AI**: 简单关键词匹配（先去open router去注册一个api key，然后输入到.env文件里面 OPENROUTER_API_KEY，就可以正常使用了）
 - **数据存储**: 内存存储（可升级为SQLite）
 
 ## 安装步骤
@@ -48,6 +48,7 @@ venv\Scripts\activate
 ```bash
 cd backend
 pip install -r requirements.txt
+创建.env文件（YOUR_SITE_URL=http://localhost:5000，OPENROUTER_API_KEY）
 ```
 
 ### 4. 启动后端服务器
