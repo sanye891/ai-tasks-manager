@@ -1,4 +1,4 @@
- 🌐 [English](README.md) | [中文](README.zh-CN.md)
+ 🌐 [English](README.md) | [中文](README_CN.md)
 # AI-powered Task Manager
 
 A simple yet powerful web application that allows users to manage tasks, automatically categorize them with AI, and estimate completion time.
